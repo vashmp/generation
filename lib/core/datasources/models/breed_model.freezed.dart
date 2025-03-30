@@ -22,10 +22,10 @@ BreedModel _$BreedModelFromJson(Map<String, dynamic> json) {
 mixin _$BreedModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'wikipedia_url')
-  String get wikipediaUrl => throw _privateConstructorUsedError;
-  List<ImageModel> get image => throw _privateConstructorUsedError;
+  String? get wikipediaUrl => throw _privateConstructorUsedError;
+  ImageModel? get image => throw _privateConstructorUsedError;
 
   /// Serializes this BreedModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,9 +46,11 @@ abstract class $BreedModelCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String description,
-      @JsonKey(name: 'wikipedia_url') String wikipediaUrl,
-      List<ImageModel> image});
+      String? description,
+      @JsonKey(name: 'wikipedia_url') String? wikipediaUrl,
+      ImageModel? image});
+
+  $ImageModelCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -68,9 +70,9 @@ class _$BreedModelCopyWithImpl<$Res, $Val extends BreedModel>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
-    Object? wikipediaUrl = null,
-    Object? image = null,
+    Object? description = freezed,
+    Object? wikipediaUrl = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,19 +83,33 @@ class _$BreedModelCopyWithImpl<$Res, $Val extends BreedModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      wikipediaUrl: null == wikipediaUrl
+              as String?,
+      wikipediaUrl: freezed == wikipediaUrl
           ? _value.wikipediaUrl
           : wikipediaUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
+              as String?,
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>,
+              as ImageModel?,
     ) as $Val);
+  }
+
+  /// Create a copy of BreedModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ImageModelCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $ImageModelCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -108,9 +124,12 @@ abstract class _$$BreedModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      String description,
-      @JsonKey(name: 'wikipedia_url') String wikipediaUrl,
-      List<ImageModel> image});
+      String? description,
+      @JsonKey(name: 'wikipedia_url') String? wikipediaUrl,
+      ImageModel? image});
+
+  @override
+  $ImageModelCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -128,9 +147,9 @@ class __$$BreedModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
-    Object? wikipediaUrl = null,
-    Object? image = null,
+    Object? description = freezed,
+    Object? wikipediaUrl = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$BreedModelImpl(
       id: null == id
@@ -141,18 +160,18 @@ class __$$BreedModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      wikipediaUrl: null == wikipediaUrl
+              as String?,
+      wikipediaUrl: freezed == wikipediaUrl
           ? _value.wikipediaUrl
           : wikipediaUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value._image
+              as String?,
+      image: freezed == image
+          ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>,
+              as ImageModel?,
     ));
   }
 }
@@ -163,10 +182,9 @@ class _$BreedModelImpl implements _BreedModel {
   _$BreedModelImpl(
       {required this.id,
       required this.name,
-      required this.description,
-      @JsonKey(name: 'wikipedia_url') required this.wikipediaUrl,
-      required final List<ImageModel> image})
-      : _image = image;
+      this.description,
+      @JsonKey(name: 'wikipedia_url') this.wikipediaUrl,
+      this.image});
 
   factory _$BreedModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BreedModelImplFromJson(json);
@@ -176,17 +194,12 @@ class _$BreedModelImpl implements _BreedModel {
   @override
   final String name;
   @override
-  final String description;
+  final String? description;
   @override
   @JsonKey(name: 'wikipedia_url')
-  final String wikipediaUrl;
-  final List<ImageModel> _image;
+  final String? wikipediaUrl;
   @override
-  List<ImageModel> get image {
-    if (_image is EqualUnmodifiableListView) return _image;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_image);
-  }
+  final ImageModel? image;
 
   @override
   String toString() {
@@ -204,13 +217,13 @@ class _$BreedModelImpl implements _BreedModel {
                 other.description == description) &&
             (identical(other.wikipediaUrl, wikipediaUrl) ||
                 other.wikipediaUrl == wikipediaUrl) &&
-            const DeepCollectionEquality().equals(other._image, _image));
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description,
-      wikipediaUrl, const DeepCollectionEquality().hash(_image));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, description, wikipediaUrl, image);
 
   /// Create a copy of BreedModel
   /// with the given fields replaced by the non-null parameter values.
@@ -232,9 +245,9 @@ abstract class _BreedModel implements BreedModel {
   factory _BreedModel(
       {required final String id,
       required final String name,
-      required final String description,
-      @JsonKey(name: 'wikipedia_url') required final String wikipediaUrl,
-      required final List<ImageModel> image}) = _$BreedModelImpl;
+      final String? description,
+      @JsonKey(name: 'wikipedia_url') final String? wikipediaUrl,
+      final ImageModel? image}) = _$BreedModelImpl;
 
   factory _BreedModel.fromJson(Map<String, dynamic> json) =
       _$BreedModelImpl.fromJson;
@@ -244,12 +257,12 @@ abstract class _BreedModel implements BreedModel {
   @override
   String get name;
   @override
-  String get description;
+  String? get description;
   @override
   @JsonKey(name: 'wikipedia_url')
-  String get wikipediaUrl;
+  String? get wikipediaUrl;
   @override
-  List<ImageModel> get image;
+  ImageModel? get image;
 
   /// Create a copy of BreedModel
   /// with the given fields replaced by the non-null parameter values.

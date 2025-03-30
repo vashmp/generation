@@ -12,7 +12,7 @@ abstract class CatRemoteRetrofitRepo implements CatRemoteInterface {
 
   @override
   @GET('/breeds')
-  @Headers(<String, String>{
+  @Headers({
     'x-api-key':
         'live_IGPkEz1l0dPnozRLq0y5YpsNjTywPvqMR0nNcGgXJSWks0qy3q2HR4nP819GhZP6'
   })

@@ -9,9 +9,9 @@ class BreedModel with _$BreedModel {
   factory BreedModel({
     required String id,
     required String name,
-    required String description,
-    @JsonKey(name: 'wikipedia_url') required String wikipediaUrl,
-    required List<ImageModel> image,
+    String? description,
+    @JsonKey(name: 'wikipedia_url') String? wikipediaUrl,
+    ImageModel? image,
   }) = _BreedModel;
 
   factory BreedModel.fromJson(Map<String, dynamic> json) =>
